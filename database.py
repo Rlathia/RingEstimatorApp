@@ -14,7 +14,7 @@ class RedisClient:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(self, config):
+    def __init__(self):
         self.r = redis.Redis(
             host=config["Database"]["host"],
             port=config["Database"]["port"],

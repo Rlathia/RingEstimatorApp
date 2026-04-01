@@ -10,9 +10,10 @@ class GoldAPIService:
         self.api_key =  config["API"]["goldapi_key"]
         self.base_url = "https://www.goldapi.io/api"
 
-    def get_gold_price(self):
+    def get_gold_price(self, price_gram):
         symbol = "XAU"
         curr = "CAD"
+        price_gram = price_gram
 
         url = f"{self.base_url}/{symbol}/{curr}"
         
@@ -25,8 +26,9 @@ class GoldAPIService:
             response = requests.get(url, headers=headers)
             response.raise_for_status()
 
-            result = response.text
-            return result
+            result = response.json()
+            return result[price_gram]
+        
         except requests.exceptions.RequestException as e:
             print("Error:", str(e))
             return None
