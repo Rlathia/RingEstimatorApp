@@ -1,15 +1,23 @@
 import requests
+import configparser
 
-def make_gapi_request():
-    api_key = "goldapi-bg14smmslcrg6-io"
+# Load the config file using the Config Parser module
+config = configparser.ConfigParser()
+config.read("config.cfg")   
+
+class GoldAPIService:
+    def __init__(self):
+        self.api_key =  config["API"]["key"]
+        self.base_url = "https://www.goldapi.io/api"
+
+def get_gold_price(self):
     symbol = "XAU"
     curr = "CAD"
-    date = "/20260310"
 
-    url = f"https://www.goldapi.io/api/{symbol}/{curr}{date}"
+    url = f"{self.base_url}/{symbol}/{curr}"
     
     headers = {
-        "x-access-token": api_key,
+        "x-access-token": self.api_key,
         "Content-Type": "application/json"
     }
     
@@ -18,8 +26,9 @@ def make_gapi_request():
         response.raise_for_status()
 
         result = response.text
-        print(result)
+        return result
     except requests.exceptions.RequestException as e:
         print("Error:", str(e))
+        return None
 
-make_gapi_request()
+#make_gapi_request()
