@@ -5,10 +5,20 @@ import configparser
 config = configparser.ConfigParser()
 config.read("config.cfg")
 
-r = redis.Redis(
+class RedisClient:
+
+    _instance = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+    def __init__(self, config):
+        self.r = redis.Redis(
             host=config["Database"]["host"],
             port=config["Database"]["port"],
             password=config["Database"]["password"],
             decode_responses=True)
 
-print(r)
+#redis_client = RedisClient(config)
