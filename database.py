@@ -12,7 +12,3 @@ r = redis.Redis(
             decode_responses=True)
 
 print(r)
-
-r.set ("somekey", "somevalue")
-value = r.get("somekey")
-print(value)
