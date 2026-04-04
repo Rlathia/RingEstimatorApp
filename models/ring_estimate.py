@@ -25,8 +25,7 @@ class RingEstimate:
     def create_memento(self):
         return RingMemento(self.__dict__)
     
-    def restore_from_memento(self, memento):
+    def restore_state(self, memento):
         state = memento.get_state()
         self.__dict__.update(state)
 
-        
