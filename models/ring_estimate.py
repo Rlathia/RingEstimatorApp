@@ -7,11 +7,15 @@ class RingEstimate:
         self.diamond_size = diamond_size
         self.diamond_count = diamond_count
         self.diamond_quality = diamond_quality
-        self.gold_estimator = CostEstimatorFactory.create_gold_estimator()
-      #  self.diamond_estimator = CostEstimatorFactory.create_diamond_estimator(strategy=None)  # Replace with actual strategy
+        self.total_cost = 0
 
-    def calculate_cost(self):
-        gold_cost = self.gold_estimator.calculate_cost(self.ring_size)
-        # diamond_cost = self.diamond_estimator.calculate_cost(self.diamond_size, self.diamond_count, self.diamond_quality)
-        return gold_cost 
-    #+ diamond_cost
+    def calculate_cost(self, strategy):
+        self.gold_estimator = CostEstimatorFactory.create_gold_estimator()
+        self.diamond_estimator = CostEstimatorFactory.create_diamond_estimator(strategy)  # Replace with actual strategy
+        
+        # Calculate gold and diamond costs using the respective estimators
+        gold_cost = self.gold_estimator.calculate_gold_cost(self.ring_size)
+        diamond_cost = self.diamond_estimator.calculate_diamond_cost(self.diamond_size, self.diamond_count, self.diamond_quality)
+        print(f"Gold cost: {gold_cost}, Diamond cost: {diamond_cost}")
+        self.total_cost = gold_cost + diamond_cost
+        return self.total_cost
