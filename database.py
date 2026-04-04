@@ -20,5 +20,3 @@ class RedisClient:
             port=config["Database"]["port"],
             password=config["Database"]["password"],
             decode_responses=True)
-
-#redis_client = RedisClient(config)
