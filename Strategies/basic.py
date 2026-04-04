@@ -1,10 +1,8 @@
 from Strategies.pricing_strategy import PricingStrategy
 
 class BasicPricingStrategy(PricingStrategy):
-
-    def __init__(self):
-            super().__init__()
-
+    # Strategy Pattern: Basic Pricing Strategy
     def calculate_price(self, cost):
-        # Add a 0% markup to the cost
+
+        # Add no markup to the cost
         return cost * 1.0 

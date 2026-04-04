@@ -4,4 +4,4 @@ class PricingStrategy:
         pass
 
     def calculate_price(self, cost):
-        pass
+        raise NotImplementedError("Subclasses must implement calculate_price()")
