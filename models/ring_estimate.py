@@ -1,4 +1,6 @@
 from Estimators.factory import CostEstimatorFactory
+from Memento.memento import RingMemento
+from Database.database import RedisClient
 
 class RingEstimate:
 
@@ -19,3 +21,12 @@ class RingEstimate:
         print(f"Gold cost: {gold_cost}, Diamond cost: {diamond_cost}")
         self.total_cost = float(gold_cost) + float(diamond_cost)
         return self.total_cost
+    
+    def create_memento(self):
+        return RingMemento(self.__dict__)
+    
+    def restore_from_memento(self, memento):
+        state = memento.get_state()
+        self.__dict__.update(state)
+
+        
