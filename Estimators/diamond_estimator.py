@@ -19,9 +19,9 @@ class DiamondCostEstimator:
         base_price = 500
 
         size_multipliers = {
-            "1": 1.0,
-            "2": 1.5,
-            "3": 2.0
+            1: 1.0,
+            2: 1.5,
+            3: 2.0
         }
 
         quality_multipliers = {

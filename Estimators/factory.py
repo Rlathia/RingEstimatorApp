@@ -9,5 +9,4 @@ class CostEstimatorFactory:
 
     @staticmethod
     def create_diamond_estimator(strategy):
-        print("Factory file loaded")
         return DiamondCostEstimator(strategy)

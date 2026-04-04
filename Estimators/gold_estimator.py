@@ -1,4 +1,4 @@
-from database import RedisClient
+from Database.database import RedisClient
 
 class GoldCostEstimator:
 

@@ -1,6 +1,6 @@
 from API.goldapi import GoldAPIService
-from database import RedisClient
-from models.ring_estimate import RingEstimate
+from Database.database import RedisClient
+from Models.ring_estimate import RingEstimate
 from Strategies.basic import BasicPricingStrategy
 from Strategies.premium import PremiumPricingStrategy
 from Strategies.conservative import ConservativePricingStrategy
@@ -23,20 +23,20 @@ def main():
 
     # Store the gold price in Redis if it's successfully retrieved
     if gold_price is not None:
-        print(gold_price)
         redis_client.r.set("gold_price", gold_price)
     else:
         print("Failed to retrieve gold price.")
 
     # Get user input for ring specifications and pricing strategy
     ring_size = int(input("Enter ring size (5, 6, or 7): "))
-    diamond_size = float(input("Enter diamond size (1, 2 or 3): "))
+    diamond_size = int(input("Enter diamond size (1, 2 or 3): "))
     diamond_count = int(input("Enter number of diamonds you want in your ring: "))
     diamond_quality = input("Enter diamond quality (SI, VS, VVS): ")
     strategy_choice = input("Choose strategy (basic/premium/conservative): ")
 
     strategy = get_strategy(strategy_choice)
     ring_estimate = RingEstimate(ring_size, diamond_size, diamond_count, diamond_quality.lower())
+    # Applies selected pricing strategy to final diamond cost
     total_cost = ring_estimate.calculate_cost(strategy)
 
     # Print the total cost
