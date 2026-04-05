@@ -1,6 +1,6 @@
 from API.goldapi import GoldAPIService
 from Database.database import RedisClient
-from Models.ring_estimate import RingEstimate
+from Domain.ring_estimate import RingEstimate
 from Strategies.basic import BasicPricingStrategy
 from Strategies.premium import PremiumPricingStrategy
 from Strategies.conservative import ConservativePricingStrategy
