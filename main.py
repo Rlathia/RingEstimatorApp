@@ -39,6 +39,16 @@ def main():
     gold_api_service = GoldAPIService()
     gold_price = gold_api_service.get_gold_price("price_gram_18k")
 
+    print("Welcome to RingCostr - Your Custom Ring Cost Estimator!")
+    print(f"Current Gold Price (18k per gram): ${gold_price: .2f}")
+    print("===============================================")
+    print("This application allows you to create custom ring estimates based on your specifications.",
+          "You can choose from different pricing strategies to see how they affect the final cost.",
+          "You can also save your estimates to a Redis database for future reference.")
+    print("\n Let's get started!")
+    
+    user_name = input("\n Enter your name :")
+
     while True:
         print("\n===== RingCostr Menu =====")
         print("1. Create New Estimate")
@@ -105,7 +115,7 @@ def main():
             total_cost = state['total_cost']
 
             # Save selected estimate to Redis
-            redis_client.r.hset(f"Estimate:{index+1}", mapping={
+            redis_client.save_estimate(f"{user_name}'s Estimate:{index+1}", mapping={
             "ring_size": ring_size,
             "gold_price": gold_price,
             "diamond_size": diamond_size,
