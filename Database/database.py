@@ -15,8 +15,13 @@ class RedisClient:
         return cls._instance
 
     def __init__(self):
+
+        if self._initialized:
+            return
+
         self.r = redis.Redis(
             host=config["Database"]["host"],
             port=config["Database"]["port"],
             password=config["Database"]["password"],
             decode_responses=True)
+        self._initialized = True
