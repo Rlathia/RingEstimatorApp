@@ -1,7 +1,7 @@
 # RingCostr
 
 ## Description
-RingCostr is a cost estimation system for diamond rings based on ring size, diamond size, and gold pricing.
+RingCostr is a cost estimation system for diamond rings based on ring size, diamond size, diamond quality, number of diamonds and gold pricing.
 
 ## Features
 - Calculates ring cost
