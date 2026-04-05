@@ -1,6 +1,6 @@
 from API.goldapi import GoldAPIService
 from Database.database import RedisClient
-from Memento import history
+from Memento.memento import RingMemento
 from Models.ring_estimate import RingEstimate
 from Strategies.basic import BasicPricingStrategy
 from Strategies.premium import PremiumPricingStrategy
@@ -20,6 +20,7 @@ def get_strategy(choice):
 def main():
     gold_api_service = GoldAPIService()
     redis_client = RedisClient()
+    history = History()
     # Fetch the gold price from the API
     gold_price = gold_api_service.get_gold_price("price_gram_18k")
 
@@ -38,6 +39,9 @@ def main():
 
     strategy = get_strategy(strategy_choice)
     ring_estimate = RingEstimate(ring_size, diamond_size, diamond_count, diamond_quality.lower())
+    
+# Strategy Pattern:
+    # Allows switching between different diamond pricing algorithms
     # Applies selected pricing strategy to final diamond cost
     total_cost = ring_estimate.calculate_cost(strategy)
 
@@ -58,8 +62,10 @@ def main():
     print("Estimate saved to Redis.")
     print(redis_client.r.hgetall("latest_estimate"))
 
-    # Save the current state to history    history = History()
+# Memento Pattern:
+    # Saves the current state of the ring estimate
     memento = ring_estimate.create_memento()
+    print('ok', history)
     history.save(memento)
 
     print("State saved to history.")
