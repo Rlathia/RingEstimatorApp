@@ -14,13 +14,14 @@ def get_strategy(choice):
         return PremiumPricingStrategy()
     else:
         return ConservativePricingStrategy()
-    
+
+# Function to display estimates from memento history
 def display_estimates(history):
     if not history.get_history():
         print("No estimates found. Please create an estimate first.")
         return
     
-    print("\n===== Saved Estimates =====")
+    print("\n===== Recently Created Estimates =====")
 
     for i, memento in enumerate(history.get_history()):
         state = memento.get_state()
@@ -52,7 +53,7 @@ def main():
     while True:
         print("\n===== RingCostr Menu =====")
         print("1. Create New Estimate")
-        print("2. View Estimates")
+        print("2. View Recently Created Estimates")
         print("3. Save Estimate to Database")
         print("4. Exit")
 
@@ -63,14 +64,13 @@ def main():
             ring_size = int(input("Enter ring size (5, 6, or 7): "))
             diamond_size = int(input("Enter diamond size (1, 2 or 3): "))
             diamond_count = int(input("Enter number of diamonds you want in your ring: "))
-            diamond_quality = input("Enter diamond quality (SI, VS, VVS): ")
-            strategy_choice = input("Choose strategy (basic/premium/conservative): ")
+            diamond_quality = input("Enter diamond quality (SI, VS or VVS): ")
+            strategy_choice = input("Choose strategy (basic, conservative or premium): ")
 
-            strategy = get_strategy(strategy_choice)
+            strategy = get_strategy(strategy_choice.lower)
             ring_estimate = RingEstimate(ring_size, diamond_size, diamond_count, diamond_quality.lower(), gold_price)
         
             # Strategy Pattern:
-            # Allows switching between different diamond pricing algorithms
             # Applies selected pricing strategy to final diamond cost
             total_cost = ring_estimate.calculate_cost(strategy)
 
@@ -99,10 +99,10 @@ def main():
             # Display estimates to the user and prompt for selection
             display_estimates(history)
             index = int(input("From the above displayed estimates,"
-                              "Enter the estimate ID to save to Redis: ")) - 1
+                              " enter the estimate ID to save to database: ")) - 1
 
             if index < 0 or index >= len(history.get_history()):
-                print("Invalid estimate number.")
+                print("Invalid estimate number. Please try again.")
                 continue   
 
             # Retrieve the selected estimate from history
