@@ -13,6 +13,7 @@ RingCostr is a cost estimation system for diamond rings based on ring size, diam
 - Factory Pattern
 - Strategy Pattern
 - Memento Pattern
+- Singleton Pattern
 
 ## Technologies
 - Python
