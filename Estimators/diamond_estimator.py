@@ -16,7 +16,7 @@ class DiamondCostEstimator:
     def get_diamond_price(self, size, quality):
         
         # base price for Diamond
-        base_price = 500
+        base_price = 500.00
 
         size_multipliers = {
             1: 1.0,
@@ -33,5 +33,6 @@ class DiamondCostEstimator:
         size_factor = size_multipliers.get(size, 1.0)
         quality_factor = quality_multipliers.get(quality, 1.0)
 
-        cost = base_price * size_factor * quality_factor
+        cost = float(base_price * size_factor * quality_factor)
+
         return cost

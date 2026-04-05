@@ -10,26 +10,31 @@ class RedisClient:
     _instance = None
     _initialized = False
     
+    # Singleton Pattern:
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
         return cls._instance
 
     def __init__(self):
-
+        # Ensure that the Redis client is only initialized once (Singleton Pattern)
         if self._initialized:
             return
-
+        
+        # Initialize the Redis client with connection parameters from the config file
         self.r = redis.Redis(
             host=config["Database"]["host"],
             port=config["Database"]["port"],
             password=config["Database"]["password"],
             decode_responses=True)
+        # Set the initialized flag to True to prevent re-initialization
         self._initialized = True
 
+    # Save estimate data to Redis database
     def save_estimate(self, key, data):
         self.r.hset(key, mapping=data)
 
-    def get_all_estimates(self):
-        keys = self.r.keys("estimate:*")
+    # Retrieve estimates for a specific user
+    def get_user_estimates(self, key):
+        keys = self.r.keys(f"{key}'s Estimate:*")
         return [self.r.hgetall(k) for k in keys]

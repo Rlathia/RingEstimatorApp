@@ -19,11 +19,10 @@ class RingEstimate:
         self.diamond_estimator = CostEstimatorFactory.create_diamond_estimator(strategy)  # Replace with actual strategy
         
         # Calculate gold and diamond costs using the respective estimators
-        gold_cost = self.gold_estimator.calculate_gold_cost(self.ring_size, self.gold_price)
-        diamond_cost = self.diamond_estimator.calculate_diamond_cost(self.diamond_size, self.diamond_count, self.diamond_quality)
-        print(f"Gold cost: {gold_cost}, Diamond cost: {diamond_cost}")
+        gold_cost = float(self.gold_estimator.calculate_gold_cost(self.ring_size, self.gold_price))
+        diamond_cost = float(self.diamond_estimator.calculate_diamond_cost(self.diamond_size, self.diamond_count, self.diamond_quality))
         self.total_cost = float(gold_cost) + float(diamond_cost)
-        return self.total_cost
+        return self.total_cost, gold_cost, diamond_cost
 
     # Memento Pattern:
     # Captures and restores the state of the ring estimate  

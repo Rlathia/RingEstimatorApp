@@ -35,3 +35,4 @@ class GoldAPIService:
         except requests.exceptions.RequestException as e:
             print("Error:", str(e))
             return None
+
