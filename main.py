@@ -43,8 +43,8 @@ def main():
     print(f"Current Gold Price (18k per gram): ${gold_price: .2f}")
     print("===============================================")
     print("This application allows you to create custom ring estimates based on your specifications.",
-          "You can choose from different pricing strategies to see how they affect the final cost.",
-          "You can also save your estimates to a Redis database for future reference.")
+          "\nYou can choose from different pricing strategies to see how they affect the final cost.",
+          "\nYou can also save your estimates to a Redis database for future reference.")
     print("\n Let's get started!")
     
     user_name = input("\n Enter your name :")
@@ -115,13 +115,13 @@ def main():
             total_cost = state['total_cost']
 
             # Save selected estimate to Redis
-            redis_client.save_estimate(f"{user_name}'s Estimate:{index+1}", mapping={
+            redis_client.save_estimate(f"{user_name}'s Estimate:{index+1}", {
             "ring_size": ring_size,
-            "gold_price": gold_price,
+            "gold_price_CAD": round(gold_price, 2),
             "diamond_size": diamond_size,
             "diamond_count": diamond_count,
             "diamond_quality": diamond_quality,
-            "total_cost": total_cost,
+            "total_cost_CAD": round(total_cost, 2),
            })
 
             print(f"Estimate {index+1} saved to Redis successfully.")
