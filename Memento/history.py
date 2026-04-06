@@ -1,3 +1,5 @@
+from Memento.memento import RingMemento
+
 class History:
     def __init__(self):
         self._states = []
@@ -6,4 +8,4 @@ class History:
         return self._states    
 
     def save(self, state):
-        self._states.append(state)
+        self._states.append(RingMemento(state))
