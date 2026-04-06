@@ -7,5 +7,5 @@ class History:
     def get_history(self):
         return self._states    
 
-    def save(self, state):
-        self._states.append(RingMemento(state))
+    def save(self, memento):
+        self._states.append(memento)

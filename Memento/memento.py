@@ -1,6 +1,6 @@
 class RingMemento:
     def __init__(self, state):
-        self._state = state.copy()
+        self._state = dict(state)
 
     def get_state(self):
-        return self._state.copy()
+        return dict(self._state)

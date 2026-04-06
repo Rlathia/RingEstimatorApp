@@ -22,7 +22,7 @@ RingCostr is a cost estimation system for diamond rings based on ring size, diam
 
 ## How to Run
 1. Install dependencies:
-   pip install -r requirements.txt
+   python and redis
 
 2. Run:
    python main.py
