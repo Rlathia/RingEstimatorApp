@@ -25,7 +25,7 @@ def display_estimates(history):
             state = memento.get_state()
             message += f"\nEstimate ID {i + 1}:"
             message += f"\n  Ring Size: {state['ring_size']}"
-            message += f"\n  Diamond Size: {state['diamond_size']}"
+            message += f"\n  Diamond Weight: {state['diamond_size']}CT"
             message += f"\n  Diamond Count: {state['diamond_count']}"
             message += f"\n  Diamond Quality: {state['diamond_quality']}"
             message += f"\n  Total Cost: ${state['total_cost']}\n"
@@ -63,7 +63,7 @@ def main():
         if choice == "1":
             # Get user input for ring specifications and pricing strategy
             ring_size = int(input("Enter ring size (5, 6, or 7): "))
-            diamond_size = int(input("Enter diamond size (1, 2 or 3): "))
+            diamond_size = int(input("Enter diamond weight (1, 2 or 3): "))
             diamond_count = int(input("Enter number of diamonds you want in your ring: "))
             diamond_quality = input("Enter diamond quality (SI, VS or VVS): ")
             strategy_choice = input("Choose strategy (basic, conservative or premium): ")
@@ -140,7 +140,7 @@ def main():
                     print(f"\nEstimate ID {i + 1}:")
                     print(f"  Ring Size: {estimate['ring_size']}")
                     print(f"  Gold Price: ${estimate['gold_price_CAD']}")
-                    print(f"  Diamond Size: {estimate['diamond_size']}")
+                    print(f"  Diamond Weight: {estimate['diamond_size']} CT")
                     print(f"  Diamond Count: {estimate['diamond_count']}")
                     print(f"  Diamond Quality: {estimate['diamond_quality']}")
                     print(f"  Total Cost: ${estimate['total_cost_CAD']}")
